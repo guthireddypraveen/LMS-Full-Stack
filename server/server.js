@@ -24,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(clerkMiddleware());
 
 // Routes
+app.get('/', (req, res) => res.send("API Working"))
+app.post('/clerk', express.json() , clerkWebhooks)
+app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks)
 app.use('/api/user', require('./routes/userRoutes'));
 app.use('/api/course', require('./routes/courseRoutes'));
 app.use('/api/enrollment', require('./routes/enrollmentRoutes'));
